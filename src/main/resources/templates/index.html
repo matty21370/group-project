@@ -1,9 +1,9 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
 <!--  Last Published: Mon Feb 20 2023 15:39:18 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="63f35f60ec6be6befdc431b4" data-wf-site="63f35f60ec6be60e94c4317e">
+<html xmlns:th="http://www.thymeleaf.org" data-wf-page="63f35f60ec6be6befdc431b4" data-wf-site="63f35f60ec6be60e94c4317e">
 <head>
   <meta charset="utf-8">
-  <title>ToyStore — Webflow Ecommerce HTML website template</title>
+  <title>Amazing Store | Welcome</title>
   <meta content="Free Webflow ecommerce template for your business. Enjoy colorful design, add your products, mix components and build your own online shop!" name="description">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta content="Webflow" name="generator">
@@ -34,12 +34,12 @@
     </div>
     <div class="nav-main">
       <div class="wrapper nav-bar-wrapper">
-        <a href="index.html" aria-current="page" class="brand w-nav-brand w--current">
+        <a href="/" aria-current="page" class="brand w-nav-brand w--current">
           <div>Amazing Store</div>
         </a>
         <div class="navigation">
           <nav role="navigation" class="nav-menu w-nav-menu">
-            <a href="catalog.html" class="nav-link w-nav-link">Browse</a>
+            <a href="/items" class="nav-link w-nav-link">Browse</a>
             <a href="about.html" class="nav-link w-nav-link">About</a>
             <a href="sign-up.html" class="w-nav-link">Sign in</a>
           </nav>
@@ -137,13 +137,13 @@
         <div data-w-id="79f09a57-05ab-ed81-c059-4d50244b2341" class="home-category-card"><img src="images/Electronics.jpg" sizes="(max-width: 479px) 100vw, (max-width: 991px) 176px, 220px" srcset="images/Electronics-p-500.jpg 500w" alt="" class="home-category-image-1">
           <div class="home-category-info-1">
             <h3>Browse Listings</h3>
-            <a href="catalog.html" class="button small white w-button">Browse Now</a>
+            <a href="/items" class="button small white w-button">Browse Now</a>
           </div>
         </div>
         <div data-w-id="b498480a-a03d-afff-8227-912980ab2a0a" class="home-category-card red"><img src="images/" sizes="(max-width: 479px) 100vw, (max-width: 991px) 176px, 220px" srcset="images/33727-9-wooden-toy-transparent-image-min-p-500.png 500w, images/33727-9-wooden-toy-transparent-image-min.png 1200w" alt="" class="home-category-image-2">
           <div class="home-category-info-2">
             <h3>List Items</h3>
-            <a href="catalog.html" class="button small white w-button">List Now</a>
+            <a href="/items/add" class="button small white w-button">List Now</a>
           </div>
         </div>
       </div>
@@ -160,11 +160,11 @@
       </div>
       <div class="full-width w-dyn-list">
         <div role="list" class="products w-dyn-items">
-          <div data-w-id="86c7c915-bcbe-c30c-93c0-5bed50ef155d" role="listitem" class="product-card-wrapper w-dyn-item">
+          <div th:each="item : ${items}" data-w-id="86c7c915-bcbe-c30c-93c0-5bed50ef155d" role="listitem" class="product-card-wrapper w-dyn-item">
             <a href="#" class="product-card w-inline-block">
               <div class="product-card-image-wrapper"><img src="" alt=""></div>
-              <h6 class="product-card-heading">Test Item</h6>
-              <div class="product-card-price">fdfdfdfdfdfdffdfdfdfd</div>
+              <h6 th:text="${item.getName()}" class="product-card-heading"></h6>
+              <div th:text="'£'+${item.getPrice()}" class="product-card-price"></div>
             </a>
           </div>
         </div>

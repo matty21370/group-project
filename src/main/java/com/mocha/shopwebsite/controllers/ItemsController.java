@@ -22,7 +22,7 @@ public class ItemsController {
         Iterable<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
 
-        return "items";
+        return "catalog";
     }
 
     @GetMapping("/add")
