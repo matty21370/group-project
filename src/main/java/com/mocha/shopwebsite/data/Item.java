@@ -1,12 +1,20 @@
 package com.mocha.shopwebsite.data;
 
-public class Items {
-	
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+public class Item {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
 	private String name;
 	
-	private String quantity;
+	private Integer quantity;
 	
 	private String image;
 	
@@ -28,11 +36,11 @@ public class Items {
 		this.name = name;
 	}
 
-	public String getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(String quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 
