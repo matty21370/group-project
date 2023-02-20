@@ -19,7 +19,7 @@ public class HomeController {
         Iterable<Item> allItems = itemRepository.findAll();
         model.addAttribute("items", allItems);
 
-        return "home";
+        return "index";
     }
 
     @GetMapping("/testadd")
