@@ -22,7 +22,7 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/testadd")
     public @ResponseBody String addItem() {
         Item item = new Item();
         item.setName("Test");
