@@ -1,4 +1,4 @@
-package com.mocha.shopwebsite;
+package com.mocha.shopwebsite.data;
 
 public class Items {
 	

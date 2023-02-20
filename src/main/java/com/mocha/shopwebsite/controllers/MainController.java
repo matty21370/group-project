@@ -1,14 +1,11 @@
-package com.mocha.shopwebsite;
-import org.springframework.beans.factory.annotation.Autowired;
+package com.mocha.shopwebsite.controllers;
+import com.mocha.shopwebsite.data.User;
+import com.mocha.shopwebsite.data.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import ch.qos.logback.core.model.Model;
 
 @Controller
 public class MainController {

@@ -1,4 +1,4 @@
-package com.mocha.shopwebsite;
+package com.mocha.shopwebsite.data;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
