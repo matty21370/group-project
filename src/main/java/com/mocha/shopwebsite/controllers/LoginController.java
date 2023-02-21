@@ -9,8 +9,9 @@ import com.mocha.shopwebsite.data.Login;
 @Controller
 public class LoginController {
  @GetMapping("/login")
- public String showLogin() {
-  return "login";
+ public String showLogin(Model model) {
+  model.addAttribute("loginForm", new Login());
+  return "sign-in";
  }
  //Check for Credentials
  @PostMapping("/login")
@@ -20,10 +21,10 @@ public class LoginController {
   if(uname.equals("Prabjot") && pass.equals("AmazingPrabjot")) {
    m.addAttribute("uname", uname);
    m.addAttribute("pass", pass);
-   return "welcome";
+   return "home";
   }
   m.addAttribute("error", "Incorrect Username & Password");
-  return "login";
+  return "sign-in";
   
  }
 }

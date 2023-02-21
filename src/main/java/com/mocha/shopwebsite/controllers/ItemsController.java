@@ -25,14 +25,14 @@ public class ItemsController {
     @GetMapping("/items/add")
     public String showAddItemPage(Model model) {
         model.addAttribute("item", new Item());
-        return "addItem";
+        return "add-listing";
     }
 
     @RequestMapping(value = "/items/add", method = RequestMethod.POST)
     public String addItemSubmit(@ModelAttribute Item item, Model model) {
         model.addAttribute("item", item);
         itemRepository.save(item);
-        return "addItem";
+        return "add-listing";
     }
 
 }
