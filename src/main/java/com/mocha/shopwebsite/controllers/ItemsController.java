@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
 
@@ -39,7 +40,7 @@ public class ItemsController {
 
     @RequestMapping("/item")
     public String getItem(@RequestParam long id, Model model) {
-        Optional<Item> foundItem = itemRepository.findById((int) id);
+        Optional<Item> foundItem = itemRepository.findById(id);
 
         if(foundItem.isPresent()) {
             Item item = foundItem.get();
@@ -48,6 +49,44 @@ public class ItemsController {
         }
 
         return "detail_product";
+    }
+
+    @GetMapping("/itemsdelete")
+    public String showItemsDeletePage(Model model) {
+        Iterable<Item> items = itemRepository.findAll();
+        model.addAttribute("items", items);
+
+        return "itemsDelete";
+    }
+
+    @PostMapping("/saveItem")
+    public String saveEmployee(@ModelAttribute Item items) {
+        itemRepository.save(items);
+        return "redirect:/list";
+    }
+
+    @GetMapping("/showUpdateForm")
+    public ModelAndView showUpdateForm(@RequestParam Long id) {
+        ModelAndView mav = new ModelAndView("add-item-form");
+        Item items = itemRepository.findById(id).get();
+        mav.addObject("items", items);
+        return mav;
+    }
+
+    @PostMapping("/delete")
+    public String deleteItem(@RequestParam Long id) {
+        itemRepository.deleteById(id);
+        return "redirect:/itemsdelete";
+    }
+
+    @PostMapping("/update")
+    public String updateItem(@RequestParam Long id, @RequestParam String string) {
+        Item item = itemRepository.findById(id).orElse(null);
+        if (item != null) {
+            item.setImage(string);
+            itemRepository.save(item);
+        }
+        return "redirect:/items";
     }
 
 }
