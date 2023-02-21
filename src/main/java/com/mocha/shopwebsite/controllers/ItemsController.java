@@ -5,19 +5,16 @@ import com.mocha.shopwebsite.data.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/items")
 public class ItemsController {
 
     @Autowired
     private ItemRepository itemRepository;
 
-    @GetMapping
+    @GetMapping("/items")
     public String showItemsPage(Model model) {
         Iterable<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
@@ -25,16 +22,17 @@ public class ItemsController {
         return "catalog";
     }
 
-    @GetMapping("/add")
-    public String showAddItemPage() {
+    @GetMapping("/items/add")
+    public String showAddItemPage(Model model) {
+        model.addAttribute("item", new Item());
         return "addItem";
     }
 
-    @PostMapping("/add")
+    @RequestMapping(value = "/items/add", method = RequestMethod.POST)
     public String addItemSubmit(@ModelAttribute Item item, Model model) {
         model.addAttribute("item", item);
         itemRepository.save(item);
-        return "items";
+        return "addItem";
     }
 
 }
