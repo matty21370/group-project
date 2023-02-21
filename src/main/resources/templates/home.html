@@ -19,8 +19,8 @@
     <div class="nav-top">
       <div class="wrapper nav-top-wrapper">
         <div class="nav-top-info">
-          <div class="nav-top-text">Call Us: +44 122345657</div>
-          <div class="w-hidden-tiny">Email: <a href="#" class="link-white">amazingstore@amazing.com</a>
+          <div class="nav-top-text"></div>
+          <div class="w-hidden-tiny">
           </div>
         </div>
         <div class="nav-top-social">
@@ -120,7 +120,7 @@
   <div class="section hero-section wf-section">
     <div class="wrapper text-white">
       <div class="hero-intro">
-        <h1>Welcome to Amazing Store</h1>
+        <h1 th:text="${username}"></h1>
         <br>
         <a href="/login" class="button w-button">Sign in</a>
       </div>
@@ -153,7 +153,7 @@
     <div class="wrapper">
       <div class="shop-header">
         <h3 class="no-margin">Listings</h3>
-        <a href="catalog.html" class="link arrow-link">View More</a>
+        <a href="/items" class="link arrow-link">View More</a>
         <div class="shop-header-line">
           <div class="shop-header-color"></div>
         </div>
@@ -161,7 +161,7 @@
       <div class="full-width w-dyn-list">
         <div role="list" class="products w-dyn-items">
           <div th:each="item : ${items}" data-w-id="86c7c915-bcbe-c30c-93c0-5bed50ef155d" role="listitem" class="product-card-wrapper w-dyn-item">
-            <a href="#" class="product-card w-inline-block">
+            <a th:href="@{/item(name=${item.name})}" class="product-card w-inline-block">
               <div class="product-card-image-wrapper"><img src="" alt=""></div>
               <h6 th:text="${item.getName()}" class="product-card-heading"></h6>
               <div th:text="'£'+${item.getPrice()}" class="product-card-price"></div>

@@ -1,4 +1,6 @@
 package com.mocha.shopwebsite.controllers;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.mocha.shopwebsite.data.Login;
 @Controller
 public class LoginController {
+
+ @Autowired
+ private  CookieController cookieController;
+
+ @Autowired
+ private HttpServletResponse httpServletResponse;
+
  @GetMapping("/login")
  public String showLogin(Model model) {
   model.addAttribute("loginForm", new Login());
@@ -21,6 +30,7 @@ public class LoginController {
   if(uname.equals("Prabjot") && pass.equals("AmazingPrabjot")) {
    m.addAttribute("uname", uname);
    m.addAttribute("pass", pass);
+   cookieController.setCookie(httpServletResponse, "username", uname);
    return "home";
   }
   m.addAttribute("error", "Incorrect Username & Password");

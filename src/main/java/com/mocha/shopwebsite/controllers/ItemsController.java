@@ -35,4 +35,9 @@ public class ItemsController {
         return "add-listing";
     }
 
+    @RequestMapping("/item")
+    public String getItem(@RequestParam String name) {
+        return "detail_product";
+    }
+
 }
