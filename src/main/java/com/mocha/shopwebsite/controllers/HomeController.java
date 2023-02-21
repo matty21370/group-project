@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HomeController {
@@ -19,19 +18,6 @@ public class HomeController {
         Iterable<Item> allItems = itemRepository.findAll();
         model.addAttribute("items", allItems);
 
-        return "index";
+        return "home";
     }
-
-    @GetMapping("/testadd")
-    public @ResponseBody String addItem() {
-        Item item = new Item();
-        item.setName("Test");
-        item.setPrice(999);
-        item.setQuantity(12);
-        item.setImage("gfrgdf");
-        itemRepository.save(item);
-
-        return "Added item!";
-    }
-
 }
