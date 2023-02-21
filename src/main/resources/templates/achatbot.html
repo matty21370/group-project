@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chatbot Example</title>
+</head>
+<body>
+    <div id="chatbox">
+        <div class="chatlog">
+            <div th:each="message : ${messages}">
+                <p th:text="${message}"></p>
+            </div>
+        </div>
+        <form th:action="@{/sendMessage}" method="post" id="message-form">
+            <input type="text" id="message-input" name="message" placeholder="Type your message here" />
+            <button type="submit" id="send-button">Send</button>
+        </form>
+    </div>
+</body>
+</html>

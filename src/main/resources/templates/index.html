@@ -25,5 +25,17 @@
         </form>
       </div>
     </div>
+
+
+
+<table>
+    <tr th:each="item : ${items}">
+        <td th:text="${item.name}" />
+        <td>
+            <img th:if="${item.image}" th:src="@{'/items/' + ${item.id} + '/image'}" />
+        </td>
+    </tr>
+</table>
+
   </body>
 </html>
