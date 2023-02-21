@@ -13,9 +13,19 @@ public class Item {
 	private Integer id;
 
 	private String name;
+
+	private String description;
 	
 	private Integer quantity;
-	
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	private String image;
 	
 	private Integer price;

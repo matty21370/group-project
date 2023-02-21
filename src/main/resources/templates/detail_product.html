@@ -118,9 +118,6 @@
                         </div>
                       </div>
                     </form>
-                    <div class="w-commerce-commercecartemptystate">
-                      <div>No items found.</div>
-                    </div>
                     <div style="display:none" data-node-type="commerce-cart-error" class="w-commerce-commercecarterrorstate form-error">
                       <div class="w-cart-error-msg" data-w-cart-quantity-error="Product is not available in this quantity." data-w-cart-general-error="Something went wrong when adding this item to the cart." data-w-cart-checkout-error="Checkout is disabled on this site." data-w-cart-cart_order_min-error="The order minimum was not met. Add more items to your cart to continue." data-w-cart-subscription_error-error="Before you purchase, please use your email invite to verify your address so we can send order updates.">Product is not available in this quantity.</div>
                     </div>
@@ -145,18 +142,15 @@
       <div class="wrapper side-paddings">
         <div class="product">
           <div class="product-info">
-            <h1></h1>
-            <p class="text-grey"></p>
-            <div class="product-price"></div>
+            <h1 th:text="${item.name}"></h1>
+            <p th:text="${item.description}" class="text-grey"></p>
+            <div th:text="'£'+${item.price}" class="product-price"></div>
             <div class="full-width">
               <form data-node-type="commerce-add-to-cart-form" class="w-commerce-commerceaddtocartform add-to-cart"><input type="number" pattern="^[0-9]+$" inputmode="numeric" id="quantity-652131f9f904302b3296412795400fe8" name="commerce-add-to-cart-quantity-input" min="1" class="w-commerce-commerceaddtocartquantityinput input quantity-input" value="1">
                 <div class="buy-buttons"><input type="submit" data-node-type="commerce-add-to-cart-button" data-loading-text="Adding to cart..." value="Add to Cart" aria-busy="false" aria-haspopup="dialog" class="w-commerce-commerceaddtocartbutton button add-to-cart-button">
                   <a data-node-type="commerce-buy-now-button" data-default-text="Buy now" data-subscription-text="Subscribe now" aria-busy="false" aria-haspopup="false" class="w-commerce-commercebuynowbutton button buy-now-button" href="checkout.html">Buy now</a>
                 </div>
               </form>
-              <div style="display:none" class="w-commerce-commerceaddtocartoutofstock out-of-stock">
-                <div>This product is out of stock.</div>
-              </div>
               <div data-node-type="commerce-add-to-cart-error" style="display:none" class="w-commerce-commerceaddtocarterror form-error">
                 <div data-node-type="commerce-add-to-cart-error" data-w-add-to-cart-quantity-error="Product is not available in this quantity." data-w-add-to-cart-general-error="Something went wrong when adding this item to the cart." data-w-add-to-cart-mixed-cart-error="You can’t purchase another product with a subscription." data-w-add-to-cart-buy-now-error="Something went wrong when trying to purchase this item." data-w-add-to-cart-checkout-disabled-error="Checkout is disabled on this site." data-w-add-to-cart-select-all-options-error="Please select an option in each set.">Product is not available in this quantity.</div>
               </div>

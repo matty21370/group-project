@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @Controller
 public class ItemsController {
 
@@ -24,7 +26,7 @@ public class ItemsController {
 
     @GetMapping("/add")
     public String showAddItemPage(Model model) {
-        //model.addAttribute("item", new Item());
+        model.addAttribute("item", new Item());
         return "add-listing";
     }
 
@@ -32,11 +34,19 @@ public class ItemsController {
     public String addItemSubmit(@ModelAttribute Item item, Model model) {
         model.addAttribute("item", item);
         itemRepository.save(item);
-        return "add-listing";
+        return "redirect:/items";
     }
 
     @RequestMapping("/item")
-    public String getItem(@RequestParam String name) {
+    public String getItem(@RequestParam long id, Model model) {
+        Optional<Item> foundItem = itemRepository.findById((int) id);
+
+        if(foundItem.isPresent()) {
+            Item item = foundItem.get();
+            model.addAttribute("item", item);
+            System.out.println(item.getName());
+        }
+
         return "detail_product";
     }
 
