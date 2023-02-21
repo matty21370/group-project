@@ -9,29 +9,5 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MainController {
-	
-	private UserRepository userRepository;
-	
-	  @PostMapping(path="/add") // Map ONLY POST Requests
-	
-	  public @ResponseBody String addNewUser 
-			(@RequestParam String name, 
-			 @RequestParam Integer id) 
-	  {
-		  
-	    User n = new User();
-	    n.setFirstName(name);
-	    n.setId(id);
-	    userRepository.save(n);
-	    return "Saved";
-	  }
-	
-	  @GetMapping(path="/all")
-	  public @ResponseBody Iterable<User> getAllUsers() {
-	    // This returns a JSON or XML with the users
-	   return userRepository.findAll();
-	  
-	  }
-	  
 
 }

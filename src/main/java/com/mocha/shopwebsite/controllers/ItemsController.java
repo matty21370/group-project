@@ -22,13 +22,13 @@ public class ItemsController {
         return "catalog";
     }
 
-    @GetMapping("/items/add")
+    @GetMapping("/add")
     public String showAddItemPage(Model model) {
-        model.addAttribute("item", new Item());
+        //model.addAttribute("item", new Item());
         return "add-listing";
     }
 
-    @RequestMapping(value = "/items/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addItemSubmit(@ModelAttribute Item item, Model model) {
         model.addAttribute("item", item);
         itemRepository.save(item);
