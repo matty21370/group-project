@@ -20,4 +20,33 @@ public class HomeController {
 
         return "home";
     }
+<<<<<<< Updated upstream
+=======
+
+    @GetMapping (value = {"/about"})
+            public String showAboutPage() {
+        return "about";
+    }
+    @GetMapping (value = {"/delivery"})
+            public String showDeliveryPage(){
+        return "delivery";
+    }
+    @GetMapping (value = {"/contactus"})
+            public String showContactUsPage(){
+        return "contacts";
+    }
+
+    @GetMapping("/testadd")
+    public @ResponseBody String addItem() {
+        Item item = new Item();
+        item.setName("Test");
+        item.setPrice(999);
+        item.setQuantity(12);
+        item.setImage("gfrgdf");
+        itemRepository.save(item);
+
+        return "Added item!";
+    }
+
+>>>>>>> Stashed changes
 }
