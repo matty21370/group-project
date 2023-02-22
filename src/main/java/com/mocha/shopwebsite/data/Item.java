@@ -9,6 +9,8 @@ public class Item {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
+	private Integer userId;
+
 	private String name;
 
 	private String description;
@@ -66,8 +68,12 @@ public class Item {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
-	
-	
-	
 
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 }

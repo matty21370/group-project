@@ -13,7 +13,13 @@ import com.mocha.shopwebsite.data.Login;
 public class LoginController {
 
  @GetMapping("/login")
- public String showLogin(Model model) {
+ public String showLogin(Model model, HttpSession session) {
+  boolean loggedIn = session.getAttribute("username") != null;
+
+  if(loggedIn) {
+   return "redirect:/home";
+  }
+
   model.addAttribute("loginForm", new Login());
   return "sign-in";
  }
@@ -31,5 +37,11 @@ public class LoginController {
   m.addAttribute("error", "Incorrect Username & Password");
   return "sign-in";
   
+ }
+
+ @GetMapping("/signout")
+ public String signout(HttpSession session) {
+  session.removeAttribute("username");
+  return "redirect:/home";
  }
 }

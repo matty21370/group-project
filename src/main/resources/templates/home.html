@@ -41,7 +41,8 @@
           <nav role="navigation" class="nav-menu w-nav-menu">
             <a href="/items" class="nav-link w-nav-link">Browse</a>
             <a href="about.html" class="nav-link w-nav-link">About</a>
-            <a href="/login" class="w-nav-link">Sign in</a>
+            <a th:if="${!loggedIn}" href="/login" class="w-nav-link">Sign in</a>
+            <a th:if="${loggedIn}" href="/login" class="w-nav-link">My account</a>
           </nav>
           <div class="menu-button w-nav-button">
             <div class="w-icon-nav-menu"></div>
@@ -121,9 +122,10 @@
     <div class="wrapper text-white">
       <div class="hero-intro">
         <h1 th:if="${!loggedIn}">Hello, sign in.</h1>
-        <h1 th:if="${loggedIn}" th:text="${username}"></h1>
+        <h1 th:if="${loggedIn}" th:text="'Hello, ' + ${username}"></h1>
         <br>
-        <a href="/login" class="button w-button">Sign in</a>
+        <a th:if="${!loggedIn}" href="/login" class="button w-button">Sign in</a>
+        <a th:if="${loggedIn}" href="/signout" class="button w-button">Sign out</a>
       </div>
     </div>
     <a href="#Scroll-Section" style="-webkit-transform:translate3d(0, 0, 0) scale3d(0.5, 0.5, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0.5, 0.5, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0.5, 0.5, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0.5, 0.5, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="scroll-mouse-link w-inline-block">

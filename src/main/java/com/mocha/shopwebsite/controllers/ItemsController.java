@@ -2,7 +2,10 @@ package com.mocha.shopwebsite.controllers;
 
 import com.mocha.shopwebsite.data.Item;
 import com.mocha.shopwebsite.data.ItemRepository;
+import com.mocha.shopwebsite.data.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +21,9 @@ public class ItemsController {
     @Autowired
     private ItemRepository itemRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @GetMapping("/items")
     public String showItemsPage(Model model, HttpServletRequest request) {
         Iterable<Item> items = itemRepository.findAll();
@@ -29,14 +35,22 @@ public class ItemsController {
     }
 
     @GetMapping("/add")
-    public String showAddItemPage(Model model) {
+    public String showAddItemPage(Model model, HttpSession session) {
+        boolean loggedIn = session.getAttribute("username") != null;
+
+        if(!loggedIn) {
+            return "redirect:/login";
+        }
+
         model.addAttribute("item", new Item());
         return "add-listing";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addItemSubmit(@ModelAttribute Item item, Model model) {
+    public String addItemSubmit(@ModelAttribute Item item, Model model, HttpSession session) {
         model.addAttribute("item", item);
+        //int userId = userRepository.fi
+        //item.setUserId();
         itemRepository.save(item);
         return "redirect:/items";
     }
