@@ -25,7 +25,7 @@ public class Item {
 		this.description = description;
 	}
 
-	private String image;
+	private byte[] image;
 	
 	private Integer price;
 
@@ -53,11 +53,11 @@ public class Item {
 		this.quantity = quantity;
 	}
 
-	public String getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(String image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 

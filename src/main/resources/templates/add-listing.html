@@ -129,7 +129,7 @@
             <form th:action="@{/add}" th:object="${item}" id="wf-form-Signing-in" name="wf-form-Signing-in" data-name="Signing in" th:method="post" class="sign-in-form">
               <label for="name">Item Name</label><input th:field="*{name}" type="text" class="fields w-input" autofocus="true" maxlength="256" name="name" data-name="Name" placeholder="Teddy Bear" id="name" required="">
               <label for="Price">Price</label><input th:field="*{price}" type="number" class="fields w-input" maxlength="256" name="Price" data-name="Price" placeholder="£0.00" id="Price" required="">
-              <label for="image">Listing image</label><input th:field="*{image}" type="text" class="fields w-input" autofocus="true" maxlength="256" name="name" data-name="Name" placeholder="Teddy Bear" id="image" required="">
+              <label for="image">Listing image</label><input type="file" id="productImage" name="stringone" required>
               <label>Item Description</label><textarea th:field="*{description}" placeholder="Example Text" maxlength="5000" id="field" name="field" data-name="Field" class="fields description-class w-input"></textarea>
               <br>
               <input type="submit" value="Submit" data-wait="Please wait..." class="w-button"></form>

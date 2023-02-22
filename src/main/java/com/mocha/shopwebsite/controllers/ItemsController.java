@@ -1,5 +1,5 @@
 package com.mocha.shopwebsite.controllers;
-
+import org.springframework.http.MediaType;
 import com.mocha.shopwebsite.data.Item;
 import com.mocha.shopwebsite.data.ItemRepository;
 import com.mocha.shopwebsite.data.UserRepository;
@@ -7,6 +7,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
 
+
+@CrossOrigin
 @Controller
 public class ItemsController {
 
@@ -47,11 +52,12 @@ public class ItemsController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addItemSubmit(@ModelAttribute Item item, Model model, HttpSession session) {
+    public String addItemSubmit(@ModelAttribute Item item, Model model, @RequestParam byte[] stringone, HttpSession session) {
         model.addAttribute("item", item);
-        //int userId = userRepository.fi
-        //item.setUserId();
+        item.setImage(stringone);
+       // item1.setName(string);
         itemRepository.save(item);
+  
         return "redirect:/items";
     }
 
@@ -97,7 +103,7 @@ public class ItemsController {
     }
 
     @PostMapping("/update")
-    public String updateItem(@RequestParam Long id, @RequestParam String string) {
+    public String updateItem(@RequestParam Long id, @RequestParam byte[] string) {
         Item item = itemRepository.findById(id).orElse(null);
         if (item != null) {
             item.setImage(string);
@@ -111,4 +117,12 @@ public class ItemsController {
         return "checkout";
     }
 
+    @GetMapping("/item/image/{id}")
+    public ResponseEntity<byte[]> getImage(@PathVariable Long id) {
+        Item item = itemRepository.findById(id).orElseThrow();
+        byte[] imageBytes = item.getImage();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
+    }
 }
