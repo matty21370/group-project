@@ -21,6 +21,14 @@ public class HomeController {
         Iterable<Item> allItems = itemRepository.findAll();
         model.addAttribute("items", allItems);
 
+        boolean loggedIn = session.getAttribute("username") != null;
+
+        if(loggedIn) {
+            model.addAttribute("username", session.getAttribute("username"));
+        }
+
+        model.addAttribute("loggedIn", loggedIn);
+
         System.out.println(session.getAttribute("username"));
 
         return "home";

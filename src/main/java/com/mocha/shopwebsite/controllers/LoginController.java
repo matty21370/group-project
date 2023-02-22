@@ -12,12 +12,6 @@ import com.mocha.shopwebsite.data.Login;
 @Controller
 public class LoginController {
 
- @Autowired
- private  CookieController cookieController;
-
- @Autowired
- private HttpServletResponse httpServletResponse;
-
  @GetMapping("/login")
  public String showLogin(Model model) {
   model.addAttribute("loginForm", new Login());
