@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -61,9 +62,24 @@ public class ItemsController {
        // item1.setName(string);
         itemRepository.save(item);
   
-        return "redirect:/items";
+        return "redirect:/itemsdelete";
     }
-
+    @GetMapping("/basket/{basketId}")
+    public String viewBasket(@PathVariable("basketId") Long basketId, Model model, HttpSession session) {
+        
+        User user = userRepository.findUserByUsername((String) session.getAttribute("username")); 
+        
+        Integer userId = user.getId(); // This is getting the id associated with the username
+        
+        List<Item> items = basketRepository.findByUserId(userId);
+       
+        // This is getting the items and storing within list
+        
+        model.addAttribute("items", items); // adding to model
+        
+        return "checkout"; // return the basket
+    }
+    
     @RequestMapping("/item")
     public String getItem(@RequestParam long id, Model model) {
         Optional<Item> foundItem = itemRepository.findById(id);
@@ -106,16 +122,34 @@ public class ItemsController {
     }
 
     @PostMapping("/update")
-    public String updateItem(@RequestParam Long id, @RequestParam byte[] string, @RequestParam String stringone) {
+    public String updateItem(@RequestParam Long id, @RequestParam String string, @RequestParam String stringone) {
         Item item = itemRepository.findById(id).orElse(null);
         if (item != null) {
             item.setName(stringone);
-            //item.setImage(string);
+            item.setImage(string);
             itemRepository.save(item);
         }
-        return "redirect:/items";
+        return "redirect:/itemsdelete";
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     @GetMapping("/addtobasket")
     public String addToBasket(Model model, @RequestParam long id, HttpSession session) {
         boolean loggedIn = session.getAttribute("username") != null;
@@ -123,15 +157,12 @@ public class ItemsController {
         if(!loggedIn) {
             return "redirect:/login";
         }
-
         Basket basket = new Basket();
         User user = userRepository.findUserByUsername((String) session.getAttribute("username"));
         basket.setItemId(id);
         basket.setUserId(user.getId());
-
         System.out.println(basket.getItemId());
         basketRepository.save(basket);
-
         return "redirect:/items";
     }
 
