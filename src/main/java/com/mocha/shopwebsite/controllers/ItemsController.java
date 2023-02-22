@@ -2,6 +2,7 @@ package com.mocha.shopwebsite.controllers;
 
 import com.mocha.shopwebsite.data.Item;
 import com.mocha.shopwebsite.data.ItemRepository;
+import com.mocha.shopwebsite.data.User;
 import com.mocha.shopwebsite.data.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -49,8 +50,10 @@ public class ItemsController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addItemSubmit(@ModelAttribute Item item, Model model, HttpSession session) {
         model.addAttribute("item", item);
-        //int userId = userRepository.fi
-        //item.setUserId();
+        User user = userRepository.findUserByUsername((String) session.getAttribute("username"));
+        int userId = user.getId();
+        item.setUserId(userId);
+        System.out.println(userId);
         itemRepository.save(item);
         return "redirect:/items";
     }
@@ -97,18 +100,29 @@ public class ItemsController {
     }
 
     @PostMapping("/update")
-    public String updateItem(@RequestParam Long id, @RequestParam String string) {
+    public String updateItem(@RequestParam Long id, @RequestParam String string, @RequestParam String stringone) {
         Item item = itemRepository.findById(id).orElse(null);
         if (item != null) {
-            item.setImage(string);
+            item.setImage(stringone);
+            item.setName(string);
             itemRepository.save(item);
         }
         return "redirect:/items";
     }
 
     @GetMapping("/checkout")
-    public String showCheckout() {
+    public String showCheckout(Model model) {
+        Iterable<Item> items = itemRepository.findAll();
+        model.addAttribute("items", items);
+
         return "checkout";
+    }
+
+    @GetMapping("/records")
+    @ResponseBody
+    public String getNumberOfRecords() {
+        long numOfRecords = itemRepository.count();
+        return String.valueOf(numOfRecords);
     }
 
 }
