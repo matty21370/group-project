@@ -1,9 +1,6 @@
 package com.mocha.shopwebsite.controllers;
+import com.mocha.shopwebsite.data.*;
 import org.springframework.http.MediaType;
-import com.mocha.shopwebsite.data.Item;
-import com.mocha.shopwebsite.data.ItemRepository;
-import com.mocha.shopwebsite.data.User;
-import com.mocha.shopwebsite.data.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +21,9 @@ public class ItemsController {
 
     @Autowired
     private ItemRepository itemRepository;
+
+    @Autowired
+    private BasketRepository basketRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -57,7 +57,7 @@ public class ItemsController {
         int userId = user.getId();
         item.setUserId(userId);
         System.out.println(userId);
-        item.setImage(stringone);
+        //item.setImage(stringone);
        // item1.setName(string);
         itemRepository.save(item);
   
@@ -110,9 +110,28 @@ public class ItemsController {
         Item item = itemRepository.findById(id).orElse(null);
         if (item != null) {
             item.setName(stringone);
-            item.setImage(string);
+            //item.setImage(string);
             itemRepository.save(item);
         }
+        return "redirect:/items";
+    }
+
+    @GetMapping("/addtobasket")
+    public String addToBasket(Model model, @RequestParam long id, HttpSession session) {
+        boolean loggedIn = session.getAttribute("username") != null;
+
+        if(!loggedIn) {
+            return "redirect:/login";
+        }
+
+        Basket basket = new Basket();
+        User user = userRepository.findUserByUsername((String) session.getAttribute("username"));
+        basket.setItemId(id);
+        basket.setUserId(user.getId());
+
+        System.out.println(basket.getItemId());
+        basketRepository.save(basket);
+
         return "redirect:/items";
     }
 
@@ -131,12 +150,12 @@ public class ItemsController {
         return String.valueOf(numOfRecords);
     }
 
-    @GetMapping("/item/image/{id}")
-    public ResponseEntity<byte[]> getImage(@PathVariable Long id) {
-        Item item = itemRepository.findById(id).orElseThrow();
-        byte[] imageBytes = item.getImage();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG);
-        return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
-    }
+//    @GetMapping("/item/image/{id}")
+//    public ResponseEntity<byte[]> getImage(@PathVariable Long id) {
+//        Item item = itemRepository.findById(id).orElseThrow();
+//        //byte[] imageBytes = item.getImage();
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.IMAGE_JPEG);
+//        return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
+//    }
 }
