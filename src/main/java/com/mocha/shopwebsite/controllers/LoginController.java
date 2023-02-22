@@ -1,4 +1,6 @@
 package com.mocha.shopwebsite.controllers;
+import com.mocha.shopwebsite.data.User;
+import com.mocha.shopwebsite.data.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,9 @@ import com.mocha.shopwebsite.data.Login;
 @Controller
 public class LoginController {
 
+ @Autowired
+ UserRepository userRepository;
+
  @GetMapping("/login")
  public String showLogin(Model model, HttpSession session) {
   boolean loggedIn = session.getAttribute("username") != null;
@@ -20,23 +25,48 @@ public class LoginController {
    return "redirect:/home";
   }
 
-  model.addAttribute("loginForm", new Login());
+  model.addAttribute("loginForm", new User());
   return "sign-in";
  }
  //Check for Credentials
  @PostMapping("/login")
- public String login(@ModelAttribute(name="loginForm") Login login, Model m, HttpSession session) {
-  String uname = login.getUsername();
-  String pass = login.getPassword();
-  if(uname.equals("Prabjot") && pass.equals("AmazingPrabjot")) {
-   m.addAttribute("uname", uname);
-   m.addAttribute("pass", pass);
-   session.setAttribute("username", uname);
-   return "redirect:home";
+ public String login(@ModelAttribute(name="loginForm") User user, Model m, HttpSession session) {
+  User foundUser = userRepository.findUserByUsername(user.getUsername());
+
+  String uname = user.getUsername();
+  String pass = user.getPassword();
+
+  if(foundUser != null) {
+   if(uname.equals(foundUser.getUsername()) && pass.equals(foundUser.getPassword())) {
+    session.setAttribute("username", uname);
+    return "redirect:home";
+   } else {
+    m.addAttribute("error", "Invalid username");
+    return "sign-in";
+   }
+  } else {
+   m.addAttribute("error", "Invalid username");
+   return "sign-in";
   }
-  m.addAttribute("error", "Incorrect Username & Password");
-  return "sign-in";
-  
+ }
+
+ @GetMapping("/register")
+ public String getRegisterPage(HttpSession session, Model model) {
+  boolean loggedIn = session.getAttribute("username") != null;
+
+  if(loggedIn) {
+   return "home";
+  }
+
+  model.addAttribute("newUser", new User());
+  return "register";
+ }
+
+ @PostMapping("/register")
+ public String registerAccount(@ModelAttribute User user, Model m, HttpSession session) {
+  userRepository.save(user);
+  session.setAttribute("username", user.getUsername());
+  return "redirect:/home";
  }
 
  @GetMapping("/signout")

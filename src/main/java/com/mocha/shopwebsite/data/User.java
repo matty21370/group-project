@@ -14,9 +14,23 @@ public class User {
 	private Integer id;
 
 	private String first_name;
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	private String username;
 	
 	private String last_name;
-	
+
+	public String getPassword() {
+		return password;
+	}
+
 	private String password;
 	
 	public Integer getId() {
