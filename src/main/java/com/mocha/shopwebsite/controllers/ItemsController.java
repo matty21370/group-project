@@ -2,6 +2,7 @@ package com.mocha.shopwebsite.controllers;
 
 import com.mocha.shopwebsite.data.Item;
 import com.mocha.shopwebsite.data.ItemRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +19,11 @@ public class ItemsController {
     private ItemRepository itemRepository;
 
     @GetMapping("/items")
-    public String showItemsPage(Model model) {
+    public String showItemsPage(Model model, HttpServletRequest request) {
         Iterable<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
+
+        System.out.println(request.getSession().getAttribute("Username"));
 
         return "catalog";
     }
@@ -87,6 +90,11 @@ public class ItemsController {
             itemRepository.save(item);
         }
         return "redirect:/items";
+    }
+
+    @GetMapping("/checkout")
+    public String showCheckout() {
+        return "checkout";
     }
 
 }
