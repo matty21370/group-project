@@ -3,6 +3,8 @@ package com.mocha.shopwebsite.controllers;
 import com.mocha.shopwebsite.data.Item;
 import com.mocha.shopwebsite.data.ItemRepository;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
@@ -31,11 +33,12 @@ public class ItemsController {
     
     
     @GetMapping("/itemsdelete")
-    public String showItemsDeletePage(Model model) {
+    public String showItemsDeletePage(Model model, HttpServletRequest request) {
         Iterable<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
-
+ 
         return "itemsdelete";
+       
     }
     
     
@@ -90,17 +93,34 @@ public class ItemsController {
 	  @PostMapping("/delete")
 	    public String deleteItem(@RequestParam Long id) {
 	        itemRepository.deleteById(id);
-	        return "redirect:/items";
+	        return "redirect:/itemsdelete";
 	    }
 	  
+	  @GetMapping("/checkout")
+	    public String showCheckout(Model model) {
+	        Iterable<Item> items = itemRepository.findAll();
+	        model.addAttribute("items", items);
+	       
+	        return "checkout";
+	    }
+	    
+	  
 	  @PostMapping("/items/update")
-	  public String updateItem(@RequestParam Long id, @RequestParam String string) {
+	  public String updateItem(@RequestParam Long id,  @RequestParam String stringone,  @RequestParam String string) {
 	      Item item = itemRepository.findById(id).orElse(null);
 	      if (item != null) {
-	          item.setImage(string);
+	          item.setImage(stringone);
+	          item.setName(string);
 	          itemRepository.save(item);
 	      }
-	      return "redirect:/items";
+	      return "redirect:/itemsdelete";
+	  }
+	  
+	  @GetMapping("/items/records")
+	  @ResponseBody
+	  public String getNumberOfRecords() {
+	      long numOfRecords = itemRepository.count();
+	      return String.valueOf(numOfRecords);
 	  }
 }
 

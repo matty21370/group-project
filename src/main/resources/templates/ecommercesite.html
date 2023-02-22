@@ -12,7 +12,6 @@
   <link th:href="@{styles/abdirahmans-sublime-site-51ed33.webflow.css}" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <div class="page-wrapper">
@@ -47,21 +46,11 @@
           <div class="menu-button w-nav-button">
             <div class="w-icon-nav-menu"></div>
           </div>
-         
-              
-         
-            
-           
-           <p><span><img src="images/cart-icon.svg" alt="Shopping cart icon"> Shopping Cart:</span> <span id="numOfRecords"></span></p>
-			
-<script>
-$(document).ready(function() {
-    $.get("/items/records", function(data) {
-        $("#numOfRecords").text(data);
-    });
-});
-</script> 
-
+          <div data-node-type="commerce-cart-wrapper" data-open-product="" data-wf-cart-type="modal" data-wf-cart-query="" data-wf-page-link-href-prefix="" class="w-commerce-commercecartwrapper">
+            <a href="#" data-node-type="commerce-cart-open-link" class="w-commerce-commercecartopenlink cart-button w-inline-block">
+              <div class="w-inline-block">Cart</div><img src="images/cart-icon.svg" alt="" class="cart-icon">
+              <div class="w-commerce-commercecartopenlinkcount item-count">0</div>
+            </a>
             <div data-node-type="commerce-cart-container-wrapper" style="display:none" class="w-commerce-commercecartcontainerwrapper w-commerce-commercecartcontainerwrapper--cartType-modal">
               <div data-node-type="commerce-cart-container" class="w-commerce-commercecartcontainer cart-container">
                 <div class="w-commerce-commercecartheader cart-header">
@@ -128,138 +117,93 @@ $(document).ready(function() {
       </div>
     </div>
   </div>
-
-<!DOCTYPE html>
-<html lang="en">
-  <table class="table table-responsive">
-
-   <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Items</title>
-    <link rel="stylesheet" 
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
-      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" 
-      crossorigin="anonymous" />
-</head>
-
-  <div id = "everything">
-  <thead id = "hello">
-            <tr>
-          <th> &nbsp </th>
-              <th> &nbsp </th>
-              <th> &nbsp </th>
-                <th style = "position:fixed; margin-left:-25px; width: 50px; background-color:red">ID</th>
-                <th> &nbsp </th>
-                   <th> &nbsp </th>
-                   
-              
-             <th> &nbsp </th>
-                <th>Name</th>
-                     <th> &nbsp </th>
-                   <th> &nbsp </th>
-               <th> &nbsp </th>
-               <th> &nbsp </th>
-                 <th> &nbsp </th>
-                <th> Image </th>
-              
-            </tr>
-        </thead>
- 
-<body>
-    <h1 style = "text-align:center"> Hey Prabjot, Edit your items</h1>
-      <div id = "container">
-    <table id = "container">
-        <thead>
-            <tr>
-                <th></th>
-                <th></th>
-                <th>  </th>
-              
-            </tr>
-        </thead>
-      
-        <tbody id = "hello">
-            <tr syle = "background-color:red" th:each="items : ${items}">
-                <td style = "width: 50px; background-color:red; margin-left:100px" th:text="${items.id}"></td>
-                <td>
-                    <form th:action="@{/delete}" method="post">
-                        <input type="hidden" name="id" th:value="${items.id}" />
-                        
-                        <button id = "button2" type="submit">Delete</button>
-                    </form>
-                   
-                    <form method="post" th:action="@{/items/update}">
-                        <input type="hidden" name="id" th:value="${items.id}" />
-                        <input type="text" name="stringone" th:value="${items.image}" />
-                        <input type="text" name="string" th:value="${items.name}" />
-              <button id = "button1" type="submit">Save</button>
-                    </form>
-                    
-                  </td>
-                </td>
-            </tr>
-        </tbody>
+  <div class="section hero-section wf-section">
+    <div class="wrapper text-white">
+      <div class="hero-intro">
+        <h1>Welcome to Amazing Store</h1>
+        <br>
+        <a href="catalog.html" class="button w-button">Sign in</a>
       </div>
-      
-    </table>
-
-</body>
-
+    </div>
+    <a href="#Scroll-Section" style="-webkit-transform:translate3d(0, 0, 0) scale3d(0.5, 0.5, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0.5, 0.5, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0.5, 0.5, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0.5, 0.5, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="scroll-mouse-link w-inline-block">
+      <div class="mouse-icon">
+        <div class="mouse-wheel-icon"></div>
+      </div>
+    </a>
+  </div>
+  <div id="Scroll-Section" class="section haze wf-section">
+    <div class="wrapper">
+      <div class="home-categories">
+        <div data-w-id="79f09a57-05ab-ed81-c059-4d50244b2341" class="home-category-card"><img src="images/Electronics.jpg" sizes="(max-width: 479px) 100vw, (max-width: 991px) 176px, 220px" srcset="images/Electronics-p-500.jpg 500w" alt="" class="home-category-image-1">
+          <div class="home-category-info-1">
+            <h3>Browse Listings</h3>
+            <a href="/items" class="button small white w-button">Browse Now</a>
+          </div>
+        </div>
+        <div data-w-id="b498480a-a03d-afff-8227-912980ab2a0a" class="home-category-card red"><img src="images/" sizes="(max-width: 479px) 100vw, (max-width: 991px) 176px, 220px" srcset="images/33727-9-wooden-toy-transparent-image-min-p-500.png 500w, images/33727-9-wooden-toy-transparent-image-min.png 1200w" alt="" class="home-category-image-2">
+          <div class="home-category-info-2">
+            <h3>List Items</h3>
+            <a href="/items/add" class="button small white w-button">List Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section haze no-padding-top wf-section">
+    <div class="wrapper">
+      <div class="shop-header">
+        <h3 class="no-margin">Listings</h3>
+        <a href="catalog.html" class="link arrow-link">View More</a>
+        <div class="shop-header-line">
+          <div class="shop-header-color"></div>
+        </div>
+      </div>
+      <div class="full-width w-dyn-list">
+        <div role="list" class="products w-dyn-items">
+          <div th:each="item : ${items}" data-w-id="86c7c915-bcbe-c30c-93c0-5bed50ef155d" role="listitem" class="product-card-wrapper w-dyn-item">
+            <a href="#" class="product-card w-inline-block">
+              <div class="product-card-image-wrapper"><img th:src="${item.getImage()}"></div>
+              <h6 th:text="${item.getName()}" class="product-card-heading"></h6>
+              <div th:text="'£'+${item.getPrice()}" class="product-card-price"></div>
+            </a>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section no-padding-vertical wf-section">
+    <div class="wrapper side-paddings"></div>
+  </div>
+  <div class="section color no-padding-vertical wf-section">
+    <div class="wrapper text-white">
+      <div class="footer">
+        <div class="footer-left">
+          <a href="home.html" aria-current="page" class="footer-brand w-nav-brand w--current">
+            <div>Amazing Store</div>
+          </a>
+        </div>
+        <div class="footer-nav">
+          <a href="home.html" aria-current="page" class="footer-link w--current">Home</a>
+          <a href="catalog.html" class="footer-link">Browse</a>
+          <a href="about.html" class="footer-link">About</a>
+        </div>
+        <div class="footer-social">
+          <a href="" target="_blank" class="footer-social-link w-inline-block"><img src="images/twitter-icon-white.svg" alt=""></a>
+          <a href="" target="_blank" class="footer-social-link w-inline-block"><img src="images/facebook-icon-white.svg" alt=""></a>
+          <a href="" target="_blank" class="footer-social-link w-inline-block"><img src="images/instagram-icon-white.svg" alt=""></a>
+          <a href="" target="_blank" class="footer-social-link w-inline-block"><img src="images/pinterest-icon-white.svg" alt=""></a>
+          <a href="" target="_blank" class="footer-social-link w-inline-block"><img src="images/youtube-icon.svg" alt=""></a>
+        </div>
+        <div class="footer-bottom">
+          <div class="footer-bottom-left">
+            <div>Created with love by Mocha
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</html>
-
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-#something {
-  background-color: lightblue;
-  width: 500px;
-  position: fixed;
-  margin-top: -50px;
-  margin-left: 30px;
-  border: 15px solid lightblue ;
- 
-}
-</style>
-</head>
-<body>
-
-<div id = "something">
-  
-    <h1 style = "text-align:center"> Information </h1> 
-
-    <h1 style = "text-align:center">  &nbsp</h1> 
-    <ul> <li> Click <b> Delete </b> to delete item </li> </ul>
-    <ul> <li> Type in a particular text within the <b> name </b> field to update your item </li> </ul>
-      <ul> <li> Type in a particular text within the <b> image </b> field to update your image file </li> </ul> 
-      <ul> <li> Click on <b> add </b> to add a new item 
+<!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 </body>
 </html>
-
-<style>
-  #button2 {
-    
-    position:fixed;
-left:1190px;
-width: 80px;
-/* additional code */
-}
-#button1 {
-  position:fixed;
-left:1100px;
-width: 80px;
-/* additional code */
-}
-
-  #container {
-     margin-top: 50px;
-    margin-left:60px;
-  }
-  #hello {
-   position: fixed;
-    margin-left: 600px;
-  }
-
-</style>
