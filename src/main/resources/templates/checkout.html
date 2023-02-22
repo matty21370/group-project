@@ -772,6 +772,12 @@
             <div class="w-commerce-commercecheckoutorderitemswrapper order-block-side">
               <div class="w-commerce-commercecheckoutsummaryblockheader order-block-side-header">
                 <h5 class="no-margin">Items in Order</h5>
+                  <div th:each="item : ${items}" data-w-id="86c7c915-bcbe-c30c-93c0-5bed50ef155d" role="listitem" class="product-card-wrapper w-dyn-item">
+                      <a th:href="@{/item(id=${item.id})}" class="product-card w-inline-block">
+                          <h6 th:text="${item.getName()}" class="product-card-heading"></h6>
+                          <div th:text="'£'+${item.getPrice()}" class="product-card-price"></div>
+                      </a>
+                  </div>
               </div>
               <fieldset class="w-commerce-commercecheckoutblockcontent order-block-side-content">
                 <script type="text/x-wf-template" id="wf-template-3acf49e9-83bd-5521-6ac3-9bea26d75bf6"></script>

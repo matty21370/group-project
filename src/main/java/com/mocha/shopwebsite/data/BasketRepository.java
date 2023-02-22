@@ -2,5 +2,10 @@ package com.mocha.shopwebsite.data;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface BasketRepository extends JpaRepository<Basket, Long> {
+import java.util.List;
+
+public interface BasketRepository extends JpaRepository<Basket, Integer> {
+
+    List<Basket> findByUserId(Integer userId);
+
 }

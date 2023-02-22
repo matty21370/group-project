@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -51,7 +53,7 @@ public class ItemsController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addItemSubmit(@ModelAttribute Item item, Model model, @RequestParam byte[] stringone, HttpSession session) {
+    public String addItemSubmit(@ModelAttribute Item item, Model model, HttpSession session) {
         model.addAttribute("item", item);
         User user = userRepository.findUserByUsername((String) session.getAttribute("username"));
         int userId = user.getId();
@@ -135,19 +137,44 @@ public class ItemsController {
         return "redirect:/items";
     }
 
-    @GetMapping("/checkout")
-    public String showCheckout(Model model) {
-        Iterable<Item> items = itemRepository.findAll();
-        model.addAttribute("items", items);
-
-        return "checkout";
-    }
+//    @GetMapping("/checkout")
+//    public String showCheckout(Model model) {
+//        Iterable<Item> items = itemRepository.findAll();
+//        model.addAttribute("items", items);
+//
+//        return "checkout";
+//    }
 
     @GetMapping("/records")
     @ResponseBody
     public String getNumberOfRecords() {
         long numOfRecords = itemRepository.count();
         return String.valueOf(numOfRecords);
+    }
+
+    @GetMapping("/checkout")
+    public String viewBasket(Model model, HttpSession session) {
+
+        User user = userRepository.findUserByUsername((String) session.getAttribute("username"));
+
+        Integer userId = user.getId(); // This is getting the id associated with the username
+
+        List<Basket> orders = basketRepository.findByUserId(userId);
+        List<Item> items = new ArrayList<>();
+
+        for(Basket basket : orders) {
+            long itemId = basket.getItemId();
+            Optional<Item> item = itemRepository.findById(itemId);
+            item.ifPresent(items::add);
+        }
+
+        System.out.println(orders.get(0).getItemId());
+
+        // This is getting the items and storing within list
+
+        model.addAttribute("items", items); // adding to model
+
+        return "checkout"; // return the basket
     }
 
 //    @GetMapping("/item/image/{id}")

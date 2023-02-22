@@ -2,8 +2,6 @@ package com.mocha.shopwebsite.controllers;
 
 import com.mocha.shopwebsite.data.Item;
 import com.mocha.shopwebsite.data.ItemRepository;
-import com.mocha.shopwebsite.data.User;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,5 +30,17 @@ public class HomeController {
         System.out.println(session.getAttribute("username"));
 
         return "home";
+    }
+
+    @GetMapping("/account")
+    public String showAccountPage(Model model, HttpSession session) {
+        boolean loggedIn = session.getAttribute("username") != null;
+
+        if(!loggedIn) {
+            //return "redirect:/login";
+        }
+
+        model.addAttribute("loggedIn", true);
+        return "my_account";
     }
 }
