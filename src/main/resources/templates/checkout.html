@@ -774,18 +774,13 @@
                     <div th:each="items : ${items}" data-w-id="86c7c915-bcbe-c30c-93c0-5bed50ef155d" role="listitem" class="">
                         <p style = "font-size:20px; color:black" th:text="'£' + ${items.getPrice()} + ' ' + ${items.getName()}" >
                         </p>
-                      
+                        <a> &nbsp </a>
+
                         <img style = "width: 70px; height: 80px" th:src="${items.getImage()}">
 
-                        <form th:action="@{/checkoutone}" method="post">
-                            <input type="hidden" name="id" th:value="${items.id}" />
-                            <button id = "button2" type="submit">Delete</button>
-                        </form>
-					  <a> &nbsp </a>
-
                     </div>
-                    <p style = "font-size:20px"> Item Total = £10 </h1>
-                    <form th:action="@{/checkingoutone}" method="post">
+                  
+                    <form style = "font-size:30px"  th:action="@{/checkingout}" method="post">
                         <button id = "button3" type="submit">checkingout</button>
                     </form>
                 </ul>
@@ -795,30 +790,13 @@
                     <div role="list" class="w-commerce-commercecheckoutorderitemslist" data-wf-collection="database.commerceOrder.userItems" data-wf-template-id="wf-template-3acf49e9-83bd-5521-6ac3-9bea26d75bf6"></div>
                 </fieldset>
             </div>
-            <form data-node-type="commerce-checkout-discount-form" class="w-commerce-commercecheckoutdiscounts order-block-side discount-block"><label class="w-commerce-commercecheckoutdiscountslabel">Discount Code</label><input type="text" data-node-type="commerce-checkout-discount-input" class="w-commerce-commercecheckoutdiscountsinput input small w-input" maxlength="256" name="field" data-name="field" placeholder="" id="field"><button aria-label="Apply Discount" class="w-commerce-commercecheckoutdiscountsbutton button small">Apply</button></form>
-            <div class="w-commerce-commercecheckoutordersummarywrapper order-block-side">
-                <div class="w-commerce-commercecheckoutsummaryblockheader order-block-side-header">
-                    <h5 class="no-margin">Order Summary</h5>
-                </div>
-                <fieldset class="w-commerce-commercecheckoutblockcontent order-block-side-content">
-                    <div class="w-commerce-commercecheckoutsummarylineitem">
-                        <div>Subtotal</div>
-                        <div></div>
-                    </div>
-                    <script type="text/x-wf-template" id="wf-template-3acf49e9-83bd-5521-6ac3-9bea26d75c0a">%3Cdiv%20class%3D%22w-commerce-commercecheckoutordersummaryextraitemslistitem%22%3E%3Cdiv%3E%3C%2Fdiv%3E%3Cdiv%3E%3C%2Fdiv%3E%3C%2Fdiv%3E</script>
-                    <div class="w-commerce-commercecheckoutordersummaryextraitemslist" data-wf-collection="database.commerceOrder.extraItems" data-wf-template-id="wf-template-3acf49e9-83bd-5521-6ac3-9bea26d75c0a">
-                        <div class="w-commerce-commercecheckoutordersummaryextraitemslistitem">
-                            <div></div>
-                            <div></div>
-                        </div>
-                    </div>
-                    <div class="w-commerce-commercecheckoutsummarylineitem">
+            <div class="w-commerce-commercecheckoutsummarylineitem">
                         <div>Total</div>
                         <div class="w-commerce-commercecheckoutsummarytotal"></div>
                     </div>
                 </fieldset>
             </div>
-            <a href="#" value="Place Order" data-node-type="commerce-checkout-place-order-button" class="w-commerce-commercecheckoutplaceorderbutton button" data-loading-text="Placing Order...">Place Order</a>
+    
             <div data-node-type="commerce-checkout-error-state" style="display:none" class="w-commerce-commercecheckouterrorstate form-error">
                 <div aria-live="polite" class="w-checkout-error-msg" data-w-info-error="There was an error processing your customer info. Please try again, or contact us if you continue to have problems." data-w-shipping-error="Sorry. We can’t ship your order to the address provided." data-w-billing-error="Your payment could not be completed with the payment information provided. Please make sure that your card and billing address information is correct, or try a different payment card, to complete this order. Contact us if you continue to have problems." data-w-payment-error="There was an error processing your payment. Please try again, or contact us if you continue to have problems." data-w-pricing-error="The prices of one or more items in your cart have changed. Please refresh this page and try again." data-w-minimum-error="The order minimum was not met. Add more items to your cart to continue." data-w-extras-error="A merchant setting has changed that impacts your cart. Please refresh and try again." data-w-product-error="One or more of the products in your cart have been removed. Please refresh the page and try again." data-w-invalid-discount-error="This discount is invalid." data-w-expired-discount-error="This discount is no longer available." data-w-usage-reached-discount-error="This discount is no longer available." data-w-requirements-not-met-error="Your order does not meet the requirements for this discount.">There was an error processing your customer info. Please try again, or contact us if you continue to have problems.</div>
             </div>
