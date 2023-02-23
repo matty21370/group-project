@@ -786,7 +786,7 @@
      </p>         
       <img th:src="${items.getImage()}">
       
-      <form th:action="@{/deletee}" method="post">
+      <form th:action="@{/checkout}" method="post">
        <input type="hidden" name="id" th:value="${items.id}" />
        <button id = "button2" type="submit">Delete</button>
        </form>
@@ -794,6 +794,9 @@
         
      </div>
      <h1> Item Total = </h1>
+      <form th:action="@{/checkingout}" method="post">
+       <button id = "button2" type="submit">checkingout</button>
+       </form>
      </ul>
     
               

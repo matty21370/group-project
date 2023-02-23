@@ -86,6 +86,8 @@ public class ItemsController {
 
         return "itemsDelete";
     }
+    
+    
 
     @PostMapping("/saveItem")
     public String saveEmployee(@ModelAttribute Item items) {
@@ -99,6 +101,17 @@ public class ItemsController {
         Item items = itemRepository.findById(id).get();
         mav.addObject("items", items);
         return mav;
+    }
+    
+    @PostMapping("/checkout")
+    public String deleteItemm(@RequestParam Long id) {
+        itemRepository.deleteById(id);
+        return "redirect:/checkout";
+    }
+    
+    @PostMapping("/checkingout")
+    public String checkingout() {
+        return "checkingout";
     }
 
     @PostMapping("/delete")
@@ -117,6 +130,13 @@ public class ItemsController {
         }
         return "redirect:/items";
     }
+    
+    
+    
+    
+    
+    
+    
 
     @GetMapping("/addtobasket")
     public String addToBasket(Model model, @RequestParam long id, HttpSession session) {
