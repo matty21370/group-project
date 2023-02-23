@@ -167,6 +167,7 @@
     </thead>
 
     <body>
+
     <h1 style = "text-align:center"> Hey Prabjot, Edit your items</h1>
     <div id = "container">
       <table id = "container">
@@ -180,7 +181,7 @@
         </thead>
 
         <tbody id = "hello">
-        <tr syle = "background-color:red" th:each="items : ${items}">
+        <tr style = "background-color:red" th:each="items : ${items}">
           <td style = "width: 50px; background-color:red; margin-left:100px" th:text="${items.id}"></td>
           <td>
             <form th:action="@{/delete}" method="post">
