@@ -769,40 +769,25 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
                 <ul>
                     <h1> Item Order </h1>
                     <div th:each="items : ${items}" data-w-id="86c7c915-bcbe-c30c-93c0-5bed50ef155d" role="listitem" class="">
-                        <p style = "
-
-	 text-align:center; font-size:20px; color:cornflowerblue"
-
-                           th:text="'£' + ${items.getPrice()} + ${items.getName()}" >
-
-
-
+                        <p style = "text-align:center; font-size:20px; color:cornflowerblue" th:text="'£' + ${items.getPrice()} + ${items.getName()}" >
                         </p>
+
                         <img th:src="${items.getImage()}">
 
-                        <form th:action="@{/deletee}" method="post">
+                        <form th:action="@{/checkout}" method="post">
                             <input type="hidden" name="id" th:value="${items.id}" />
                             <button id = "button2" type="submit">Delete</button>
                         </form>
 
-
                     </div>
                     <h1> Item Total = </h1>
+                    <form th:action="@{/checkingout}" method="post">
+                        <button id = "button3" type="submit">checkingout</button>
+                    </form>
                 </ul>
-
-
-
-
-
-
-
 
                 <fieldset class="w-commerce-commercecheckoutblockcontent order-block-side-content">
                     <script type="text/x-wf-template" id="wf-template-3acf49e9-83bd-5521-6ac3-9bea26d75bf6"></script>
