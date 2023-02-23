@@ -37,7 +37,7 @@ public class HomeController {
         boolean loggedIn = session.getAttribute("username") != null;
 
         if(!loggedIn) {
-            //return "redirect:/login";
+            return "redirect:/login";
         }
 
         model.addAttribute("loggedIn", true);
