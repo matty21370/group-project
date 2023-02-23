@@ -169,14 +169,15 @@ public class ItemsController {
         return "checkout"; // return the basket
     }
 
-    @PostMapping("/checkout")
+    @PostMapping("/checkoutone")
     public String deleteItemm(@RequestParam Integer id) {
         basketRepository.deleteById(id);
-        return "redirect:/checkout";
+        return "checkout";
     }
 
-    @PostMapping("/checkingout")
+    @PostMapping("/checkingoutonet")
     public String checkingout() {
+    	basketRepository.deleteAll();
         return "checkingout";
     }
 }

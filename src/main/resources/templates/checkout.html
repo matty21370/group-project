@@ -772,19 +772,20 @@
                 <ul>
                     <h1> Item Order </h1>
                     <div th:each="items : ${items}" data-w-id="86c7c915-bcbe-c30c-93c0-5bed50ef155d" role="listitem" class="">
-                        <p style = "text-align:center; font-size:20px; color:cornflowerblue" th:text="'£' + ${items.getPrice()} + ${items.getName()}" >
+                        <p style = "font-size:20px; color:black" th:text="'£' + ${items.getPrice()} + ' ' + ${items.getName()}" >
                         </p>
+                      
+                        <img style = "width: 70px; height: 80px" th:src="${items.getImage()}">
 
-                        <img th:src="${items.getImage()}">
-
-                        <form th:action="@{/checkout}" method="post">
+                        <form th:action="@{/checkoutone}" method="post">
                             <input type="hidden" name="id" th:value="${items.id}" />
                             <button id = "button2" type="submit">Delete</button>
                         </form>
+					  <a> &nbsp </a>
 
                     </div>
-                    <h1> Item Total = </h1>
-                    <form th:action="@{/checkingout}" method="post">
+                    <p style = "font-size:20px"> Item Total = £10 </h1>
+                    <form th:action="@{/checkingoutone}" method="post">
                         <button id = "button3" type="submit">checkingout</button>
                     </form>
                 </ul>
