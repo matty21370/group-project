@@ -16,31 +16,34 @@ public class HomeController {
 
     @GetMapping(value = {"/", "/home"})
     public String showHomePage(Model model, HttpSession session) {
+
         Iterable<Item> allItems = itemRepository.findAll();
         model.addAttribute("items", allItems);
 
-        boolean loggedIn = session.getAttribute("username") != null;
-
-        if(loggedIn) {
+        if(Helper.getInstance().isLoggedIn(session)) {
             model.addAttribute("username", session.getAttribute("username"));
+            model.addAttribute("loggedIn", true);
+        } else {
+            model.addAttribute("loggedIn", false);
         }
-
-        model.addAttribute("loggedIn", loggedIn);
-
-        System.out.println(session.getAttribute("username"));
 
         return "home";
     }
 
     @GetMapping("/account")
     public String showAccountPage(Model model, HttpSession session) {
-        boolean loggedIn = session.getAttribute("username") != null;
-
-        if(!loggedIn) {
+        if(Helper.getInstance().isLoggedIn(session)) {
             return "redirect:/login";
         }
 
         model.addAttribute("loggedIn", true);
         return "my_account";
+    }
+
+    @GetMapping("/about")
+    public String showAboutPage(Model model, HttpSession session) {
+        model.addAttribute("loggedIn", Helper.getInstance().isLoggedIn(session));
+
+        return "about";
     }
 }

@@ -31,11 +31,11 @@ public class ItemsController {
     private UserRepository userRepository;
 
     @GetMapping("/items")
-    public String showItemsPage(Model model, HttpServletRequest request) {
+    public String showItemsPage(Model model, HttpSession session) {
         Iterable<Item> items = itemRepository.findAll();
-        model.addAttribute("items", items);
 
-        System.out.println(request.getSession().getAttribute("Username"));
+        model.addAttribute("items", items);
+        model.addAttribute("loggedIn", Helper.getInstance().isLoggedIn(session));
 
         return "catalog";
     }
@@ -49,6 +49,7 @@ public class ItemsController {
         }
 
         model.addAttribute("item", new Item());
+        model.addAttribute("loggedIn", true);
         return "add-listing";
     }
 
@@ -59,15 +60,13 @@ public class ItemsController {
         int userId = user.getId();
         item.setUserId(userId);
         System.out.println(userId);
-        //item.setImage(stringone);
-       // item1.setName(string);
         itemRepository.save(item);
   
         return "redirect:/items";
     }
 
     @RequestMapping("/item")
-    public String getItem(@RequestParam long id, Model model) {
+    public String getItem(@RequestParam long id, Model model, HttpSession session) {
         Optional<Item> foundItem = itemRepository.findById(id);
 
         if(foundItem.isPresent()) {
@@ -76,13 +75,17 @@ public class ItemsController {
             System.out.println(item.getName());
         }
 
+        model.addAttribute("loggedIn", Helper.getInstance().isLoggedIn(session));
+
         return "detail_product";
     }
 
     @GetMapping("/itemsdelete")
-    public String showItemsDeletePage(Model model) {
+    public String showItemsDeletePage(Model model, HttpSession session) {
         Iterable<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
+
+        model.addAttribute("loggedIn", Helper.getInstance().isLoggedIn(session));
 
         return "itemsDelete";
     }
@@ -119,7 +122,7 @@ public class ItemsController {
     }
 
     @GetMapping("/addtobasket")
-    public String addToBasket(Model model, @RequestParam long id, HttpSession session) {
+    public String addToBasket(@RequestParam long id, HttpSession session) {
         boolean loggedIn = session.getAttribute("username") != null;
 
         if(!loggedIn) {
@@ -136,14 +139,6 @@ public class ItemsController {
 
         return "redirect:/items";
     }
-
-//    @GetMapping("/checkout")
-//    public String showCheckout(Model model) {
-//        Iterable<Item> items = itemRepository.findAll();
-//        model.addAttribute("items", items);
-//
-//        return "checkout";
-//    }
 
     @GetMapping("/records")
     @ResponseBody
@@ -168,21 +163,9 @@ public class ItemsController {
             item.ifPresent(items::add);
         }
 
-        System.out.println(orders.get(0).getItemId());
-
-        // This is getting the items and storing within list
-
         model.addAttribute("items", items); // adding to model
+        model.addAttribute("loggedIn", Helper.getInstance().isLoggedIn(session));
 
         return "checkout"; // return the basket
     }
-
-//    @GetMapping("/item/image/{id}")
-//    public ResponseEntity<byte[]> getImage(@PathVariable Long id) {
-//        Item item = itemRepository.findById(id).orElseThrow();
-//        //byte[] imageBytes = item.getImage();
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.IMAGE_JPEG);
-//        return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
-//    }
 }

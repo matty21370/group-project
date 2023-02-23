@@ -3,7 +3,7 @@
 <html data-wf-page="63f37850b68fbba4fab19ab4" data-wf-site="63f35f60ec6be60e94c4317e">
 <head>
   <meta charset="utf-8">
-  <title>Sign Up</title>
+  <title>Amazing Store | Sign Up</title>
   <meta content="Free Webflow ecommerce template for your business. Enjoy colorful design, add your products, mix components and build your own online shop!" name="description">
   <meta content="Sign Up" property="og:title">
   <meta content="Free Webflow ecommerce template for your business. Enjoy colorful design, add your products, mix components and build your own online shop!" property="og:description">
@@ -30,16 +30,16 @@
       <div class="nav-top">
         <div class="wrapper nav-top-wrapper">
           <div class="nav-top-info">
-            <div class="nav-top-text">Call Us: +1 213 974-5898</div>
-            <div class="w-hidden-tiny">Email: <a href="#" class="link-white">toystore@template.com</a>
+            <div class="nav-top-text"></div>
+            <div class="w-hidden-tiny">
             </div>
           </div>
           <div class="nav-top-social">
-            <a href="https://elasticthemes.com" target="_blank" class="social-link w-inline-block"><img src="../static/images/twitter-icon-white.svg" alt=""></a>
-            <a href="https://elasticthemes.com" target="_blank" class="social-link w-inline-block"><img src="../static/images/facebook-icon-white.svg" alt=""></a>
-            <a href="https://elasticthemes.com" target="_blank" class="social-link w-inline-block"><img src="../static/images/instagram-icon-white.svg" alt=""></a>
-            <a href="https://elasticthemes.com" target="_blank" class="social-link w-inline-block"><img src="../static/images/pinterest-icon-white.svg" alt=""></a>
-            <a href="https://elasticthemes.com" target="_blank" class="social-link w-inline-block"><img src="../static/images/youtube-icon.svg" alt=""></a>
+            <a href="https://elasticthemes.com" target="_blank" class="social-link w-inline-block"><img src="images/twitter-icon-white.svg" alt=""></a>
+            <a href="https://elasticthemes.com" target="_blank" class="social-link w-inline-block"><img src="images/facebook-icon-white.svg" alt=""></a>
+            <a href="https://elasticthemes.com" target="_blank" class="social-link w-inline-block"><img src="images/instagram-icon-white.svg" alt=""></a>
+            <a href="https://elasticthemes.com" target="_blank" class="social-link w-inline-block"><img src="images/pinterest-icon-white.svg" alt=""></a>
+            <a href="https://elasticthemes.com" target="_blank" class="social-link w-inline-block"><img src="images/youtube-icon.svg" alt=""></a>
           </div>
         </div>
       </div>
@@ -51,8 +51,11 @@
           <div class="navigation">
             <nav role="navigation" class="nav-menu w-nav-menu">
               <a href="/items" class="nav-link w-nav-link">Browse</a>
-              <a href="about.html" class="nav-link w-nav-link">About</a>
-              <a href="/login" class="w-nav-link">Sign in</a>
+              <a href="/add" class="nav-link w-nav-link">Add Listing</a>
+              <a href="/about" class="nav-link w-nav-link">About</a>
+              <a href="contacts.html" class="nav-link w-nav-link">Contact</a>
+              <a th:if="${!loggedIn}" href="/login" class="w-nav-link">Sign in</a>
+              <a th:if="${loggedIn}" href="/account" class="w-nav-link">My account</a>
             </nav>
             <div class="menu-button w-nav-button">
               <div class="w-icon-nav-menu"></div>
