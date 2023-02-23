@@ -108,11 +108,11 @@ public class ItemsController {
     }
 
     @PostMapping("/update")
-    public String updateItem(@RequestParam Long id, @RequestParam byte[] string, @RequestParam String stringone) {
+    public String updateItem(@RequestParam Long id, @RequestParam String string, @RequestParam String stringone) {
         Item item = itemRepository.findById(id).orElse(null);
         if (item != null) {
             item.setName(stringone);
-            //item.setImage(string);
+            item.setImage(string);
             itemRepository.save(item);
         }
         return "redirect:/items";
