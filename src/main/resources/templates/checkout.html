@@ -765,7 +765,7 @@
                 <ul>
                     <h1> Item Order </h1>
                     <div th:each="items : ${items}" data-w-id="86c7c915-bcbe-c30c-93c0-5bed50ef155d" role="listitem" class="">
-                        <p style = "font-size:20px; color:black" th:text="'£' + ${items.getPrice()} + ' ' + ${items.getName()}" >
+                        <p style = "font-size:20px; color:black" th:text="'Name: ' + ${items.getName()} + ' Price: £' + ${items.getPrice()}" >
                         </p>
                         <a> &nbsp </a>
 
