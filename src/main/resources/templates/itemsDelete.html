@@ -153,13 +153,13 @@
 
 
       <th> &nbsp </th>
-      <th> Image </th>
-      <th> &nbsp </th>
-      <th> &nbsp </th>
-      <th> &nbsp </th>
-      <th> &nbsp </th>
-      <th> &nbsp </th>
       <th> Name </th>
+      <th> &nbsp </th>
+      <th> &nbsp </th>
+      <th> &nbsp </th>
+      <th> &nbsp </th>
+      <th> &nbsp </th>
+      <th> Image </th>
 
     </tr>
     </thead>
@@ -189,8 +189,8 @@
 
             <form method="post" th:action="@{/update}">
               <input type="hidden" name="id" th:value="${items.id}" />
-              <input type="text" name="stringone" th:value="${items.image}" />
-              <input type="text" name="string" th:value="${items.name}" />
+              <input type="text" name="stringone" th:value="${items.name}" />
+              <input type="text" name="string" th:value="${items.image}" />
               <button id = "button1" type="submit">Save</button>
             </form>
 
