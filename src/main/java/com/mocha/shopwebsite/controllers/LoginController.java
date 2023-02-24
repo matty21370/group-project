@@ -26,6 +26,8 @@ public class LoginController {
   }
 
   model.addAttribute("loginForm", new User());
+  model.addAttribute("loggedIn", Helper.getInstance().isLoggedIn(session));
+
   return "sign-in";
  }
  //Check for Credentials
@@ -53,6 +55,7 @@ public class LoginController {
  @GetMapping("/register")
  public String getRegisterPage(HttpSession session, Model model) {
   boolean loggedIn = session.getAttribute("username") != null;
+  model.addAttribute("loggedIn", Helper.getInstance().isLoggedIn(session));
 
   if(loggedIn) {
    return "home";

@@ -44,17 +44,20 @@
           <div class="navigation">
             <nav role="navigation" class="nav-menu w-nav-menu">
               <a href="/items" class="nav-link w-nav-link">Browse</a>
-              <a href="about.html" class="nav-link w-nav-link">About</a>
-              <a href="/login" class="w-nav-link">Sign in</a>
+              <a href="/add" class="nav-link w-nav-link">Add Listing</a>
+              <a href="/about" class="nav-link w-nav-link">About</a>
+              <a th:if="${!loggedIn}" href="/login" class="w-nav-link">Sign in</a>
+              <a th:if="${loggedIn}" href="/account" class="w-nav-link">My account</a>
             </nav>
-            <div class="menu-button w-nav-button">
-              <div class="w-icon-nav-menu"></div>
-            </div>
-            <div data-node-type="commerce-cart-wrapper" data-open-product="" data-wf-cart-type="modal" data-wf-cart-query="" data-wf-page-link-href-prefix="" class="w-commerce-commercecartwrapper">
-              <a href="#" data-node-type="commerce-cart-open-link" class="w-commerce-commercecartopenlink cart-button w-inline-block">
-                <div class="w-inline-block">Cart</div><img src="../static/images/cart-icon.svg" alt="" class="cart-icon">
-                <div class="w-commerce-commercecartopenlinkcount item-count">0</div>
-              </a>
+          </nav>
+          <div class="menu-button w-nav-button">
+            <div class="w-icon-nav-menu"></div>
+          </div>
+          <div data-node-type="commerce-cart-wrapper" data-open-product="" data-wf-cart-type="modal" data-wf-cart-query="" data-wf-page-link-href-prefix="" class="w-commerce-commercecartwrapper">
+            <a href="/checkout" data-node-type="commerce-cart-open-link" class="w-commerce-commercecartopenlink cart-button w-inline-block">
+              <div class="w-inline-block">Cart</div><img src="images/cart-icon.svg" alt="" class="cart-icon">
+              <div class="w-commerce-commercecartopenlinkcount item-count">0</div>
+            </a>
               <div data-node-type="commerce-cart-container-wrapper" style="display:none" class="w-commerce-commercecartcontainerwrapper w-commerce-commercecartcontainerwrapper--cartType-modal">
                 <div data-node-type="commerce-cart-container" class="w-commerce-commercecartcontainer cart-container">
                   <div class="w-commerce-commercecartheader cart-header">
