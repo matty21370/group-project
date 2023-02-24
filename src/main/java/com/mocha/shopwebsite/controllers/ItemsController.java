@@ -80,7 +80,7 @@ public class ItemsController {
         return "detail_product";
     }
 
-    @GetMapping("/itemsdelete")
+    @GetMapping("/itemsDelete")
     public String showItemsDeletePage(Model model, HttpSession session) {
         Iterable<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
