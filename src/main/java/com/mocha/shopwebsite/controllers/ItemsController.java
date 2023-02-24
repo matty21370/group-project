@@ -175,7 +175,7 @@ public class ItemsController {
         return "checkout";
     }
 
-    @PostMapping("/checkingoutonet")
+    @PostMapping("/checkingout")
     public String checkingout() {
     	basketRepository.deleteAll();
         return "checkingout";
